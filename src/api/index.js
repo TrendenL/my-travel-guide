@@ -11,7 +11,7 @@ import axios from 'axios';
         },
         headers: {
             'x-rapidapi-host': 'travel-advisor.p.rapidapi.com',
-            'x-rapidapi-key': 'a66e2152a7msh2ee661e95bbd120p100b53jsne032aa458a7a'
+            'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
             },
         });
 
@@ -20,3 +20,18 @@ import axios from 'axios';
         console.log(error);
     }
     };
+
+    export const getWeatherData = async(lat, lng) => {
+        try {
+            const { data } = await axios.get('https://community-open-weather-map.p.rapidapi.com/find', {
+                params: { lon: lng, lat: lat },
+                headers: {
+                'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
+                'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
+                }
+            })
+            return data
+        } catch (error) {
+            console.log(error)
+        }
+    }
